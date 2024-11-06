@@ -1,4 +1,29 @@
 import React, { useState } from 'react';
+const ProgressBar = ({ progress, color = "#172B4DD9" }) => {
+    const containerStyles = {
+      width: "100%",
+      backgroundColor: "white",
+      borderRadius: "5px",
+      height: "5px",
+      position:'absolute',
+      left:'0',
+      bottom:0,
+    };
+  
+    const fillerStyles = {
+      width: `${progress}%`,
+      backgroundColor: color,
+      height: "100%",
+      borderRadius: "5px",
+      transition: "width 0.3s ease-in-out", // Optional animation for smooth transition
+    };
+  
+    return (
+      <div style={containerStyles}>
+        <div style={fillerStyles}></div>
+      </div>
+    );
+  };
 
 const Part = ({ part }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -55,7 +80,7 @@ const Part = ({ part }) => {
                 
     }
     return (
-        <div className="bg-white shadow-md rounded-lg p-4 mb-4" style={{border:'1px solid #bef0f9'}}>
+        <div className="bg-white shadow-md rounded-lg mb-4" style={{border:'1px solid #bef0f9',padding:"10px 10px 0 10px",position:'relative',overflowY:'hidden'}}>
             <p>PART-{part.id}</p>
             <div className="part-header flex justify-between items-center border-b pb-2 mb-4">
                 <h3 className="text-lg font-semibold text-gray-700">{part.title}</h3>
@@ -110,15 +135,15 @@ const Part = ({ part }) => {
 }
                 </button>
                 </div>
-                
             </div>
+                <p className='px-1 bg-[#EFF5FF] rounded-md my-4' style={{marginLeft:'auto',width:'max-content',fontSize:'12px'}}>{part.completion}% completed</p>
             
 
             {isOpen && <div className="item-list space-y-3">
                 {part.items.map((item) => (
                     <div key={item.id} className="item flex justify-between items-center p-5 bg-gray-50 rounded-md">
                         <div className="flex items-center gap-2 text-gray-600">
-                            <span className="capitalize font-medium">{Type(item.type)}</span> - {item.title}
+                            <span className="capitalize font-medium">{Type(item.type)}</span> {item.title}
                         </div>
                         <span className="text-gray-500 text-sm flex justify-center items-center"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" style={{marginRight:'7px'}}>
 <path d="M15 9V15L19.5 19.5M28.5 15C28.5 16.7728 28.1508 18.5283 27.4724 20.1662C26.7939 21.8041 25.7995 23.2923 24.5459 24.5459C23.2923 25.7995 21.8041 26.7939 20.1662 27.4724C18.5283 28.1508 16.7728 28.5 15 28.5C13.2272 28.5 11.4717 28.1508 9.83377 27.4724C8.19588 26.7939 6.70765 25.7995 5.45406 24.5459C4.20047 23.2923 3.20606 21.8041 2.52763 20.1662C1.84919 18.5283 1.5 16.7728 1.5 15C1.5 11.4196 2.92232 7.9858 5.45406 5.45406C7.9858 2.92232 11.4196 1.5 15 1.5C18.5804 1.5 22.0142 2.92232 24.5459 5.45406C27.0777 7.9858 28.5 11.4196 28.5 15Z" stroke="url(#paint0_linear_1_183)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -133,6 +158,7 @@ const Part = ({ part }) => {
                     </div>
                 ))}
             </div>}
+            <ProgressBar progress={part.completion}/>
         </div>
     );
 };

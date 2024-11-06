@@ -22,7 +22,7 @@ const Content = () => {
             title: 'Lorem Ipsum Dolor Sit Amet',
             time: '02:00:00',
             difficulty: 'Medium',
-            completion: 45,
+            completion: 35,
             items: [
                 { id: 1, type: 'Video', title: 'Video 1', duration: '10:00' },
                 { id: 2, type: 'Article', title: 'Article 1', duration: '10:00' },
@@ -36,7 +36,7 @@ const Content = () => {
             title: 'Lorem Ipsum Dolor Sit Amet',
             time: '02:00:00',
             difficulty: 'Medium',
-            completion: 45,
+            completion: 85,
             items: [
                 { id: 1, type: 'Video', title: 'Video 1', duration: '10:00' },
                 { id: 2, type: 'Article', title: 'Article 1', duration: '10:00' },
